@@ -127,7 +127,6 @@ opacity:0;
 
 const musica = document.getElementById("musica");
 
-// Tocar ao primeiro clique
 document.addEventListener("click", () => {
     musica.play();
 }, { once: true });
@@ -144,8 +143,7 @@ function criarCoracao(){
 setInterval(criarCoracao,300);
 
 function explodir(){
-    // SALVA O TEMPO AQUI
-    localStorage.setItem("tempoMusica", musica.currentTime);
+    const musica = document.getElementById("musica");
 
     for(let i=0;i<100;i++){
         const coracao = document.createElement("div");
@@ -168,5 +166,6 @@ function explodir(){
 </body>
 
 </html>
+
 
 
