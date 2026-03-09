@@ -122,31 +122,40 @@
     </audio>
 
     <script>
-        function criarCoracao(){
-            const heart = document.createElement("div");
-            heart.classList.add("heart");
-            heart.innerHTML = "❤️";
-            heart.style.left = Math.random()*100 + "vw";
-            heart.style.animationDuration = (Math.random()*3+3)+"s";
-            document.body.appendChild(heart);
-            setTimeout(()=>{ heart.remove(); },5000);
-        }
-        setInterval(criarCoracao, 300);
+       // Sistema de corações caindo (mantido)
+function criarCoracao(){
+    const heart = document.createElement("div");
+    heart.classList.add("heart");
+    heart.innerHTML = "❤️";
+    heart.style.left = Math.random()*100 + "vw";
+    heart.style.animationDuration = (Math.random()*3+3)+"s";
+    document.body.appendChild(heart);
+    setTimeout(()=>{ heart.remove(); },5000);
+}
+setInterval(criarCoracao, 300);
 
-        const musica = document.getElementById("musica");
-        const tempoSalvo = localStorage.getItem("tempoMusica");
-        
-        if (tempoSalvo) {
-            musica.currentTime = parseFloat(tempoSalvo);
-        }
+const musica = document.getElementById("musica");
 
-        document.addEventListener("click", () => {
-            musica.play();
-        }, { once: true });
+const tempoSalvo = localStorage.getItem("tempoMusica");
 
-        setInterval(() => {
-            localStorage.setItem("tempoMusica", musica.currentTime);
-        }, 1000);
+if (tempoSalvo) {
+    musica.currentTime = parseFloat(tempoSalvo); 
+}
+
+musica.play().catch(() => {
+    console.log("Aguardando interação para soltar o som...");
+});
+
+document.addEventListener("click", () => {
+    if (musica.paused) {
+        musica.play();
+    }
+}, { once: true });
+
+setInterval(() => {
+    localStorage.setItem("tempoMusica", musica.currentTime);
+}, 1000);
     </script>
 </body>
 </html>
+
