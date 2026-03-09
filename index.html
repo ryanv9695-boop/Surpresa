@@ -143,7 +143,7 @@ function criarCoracao(){
 setInterval(criarCoracao,300);
 
 function explodir(){
-    const musica = document.getElementById("musica");
+    localStorage.setItem("tempoMusica", musica.currentTime);
 
     for(let i=0;i<100;i++){
         const coracao = document.createElement("div");
@@ -166,6 +166,7 @@ function explodir(){
 </body>
 
 </html>
+
 
 
 
